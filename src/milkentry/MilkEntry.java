@@ -1,4 +1,4 @@
-package customer;
+package milkentry;
 
 import javax.swing.*;
 
@@ -6,10 +6,10 @@ import ui.MainMenu;
 
 import java.awt.*;
 
-public class CustomerManagement extends JFrame {
+public class MilkEntry extends JFrame {
 
-    public CustomerManagement() {
-        setTitle("Customer Management");
+    public MilkEntry() {
+        setTitle("Milk Entry");
         setLayout(new FlowLayout());
 
         // TOP PANEL with Back Button
@@ -27,14 +27,12 @@ public class CustomerManagement extends JFrame {
         topPanel.add(backButton, BorderLayout.WEST);
         add(topPanel, BorderLayout.NORTH);
 
-        JButton btnAddCustomer = new JButton("Add Customer");
-        JButton btnViewCustomers = new JButton("View Customers");
+        JLabel label = new JLabel("Milk Entry Form");
+        add(label);
 
-        add(btnAddCustomer);
-        add(btnViewCustomers);
+        // Add more components here to enter milk data
 
-        setSize(300, 150);
-        setLocationRelativeTo(null); // Center the window
+        setSize(300, 200);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
     }

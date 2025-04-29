@@ -1,16 +1,19 @@
-package customer;
+package SupplierManagement;
 
-import javax.swing.*;
 
 import ui.MainMenu;
 
+import javax.swing.*;
 import java.awt.*;
 
-public class CustomerManagement extends JFrame {
+public class SupplierManagement extends JFrame {
 
-    public CustomerManagement() {
-        setTitle("Customer Management");
-        setLayout(new FlowLayout());
+    public SupplierManagement() {
+        setTitle("Supplier Management");
+        setSize(400, 300);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLayout(new BorderLayout());
 
         // TOP PANEL with Back Button
         JPanel topPanel = new JPanel(new BorderLayout());
@@ -27,15 +30,11 @@ public class CustomerManagement extends JFrame {
         topPanel.add(backButton, BorderLayout.WEST);
         add(topPanel, BorderLayout.NORTH);
 
-        JButton btnAddCustomer = new JButton("Add Customer");
-        JButton btnViewCustomers = new JButton("View Customers");
+        // CENTER PANEL with your page content
+        JPanel centerPanel = new JPanel();
+        centerPanel.add(new JLabel("Supplier Management Content Here"));
+        add(centerPanel, BorderLayout.CENTER);
 
-        add(btnAddCustomer);
-        add(btnViewCustomers);
-
-        setSize(300, 150);
-        setLocationRelativeTo(null); // Center the window
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
     }
 }

@@ -1,4 +1,4 @@
-package customer;
+package logout;
 
 import javax.swing.*;
 
@@ -6,11 +6,15 @@ import ui.MainMenu;
 
 import java.awt.*;
 
-public class CustomerManagement extends JFrame {
+public class Logout extends JFrame {
 
-    public CustomerManagement() {
-        setTitle("Customer Management");
+    public Logout() {
+        setTitle("Logout");
         setLayout(new FlowLayout());
+
+        JLabel label = new JLabel("Logging out...");
+
+        add(label);
 
         // TOP PANEL with Back Button
         JPanel topPanel = new JPanel(new BorderLayout());
@@ -27,15 +31,12 @@ public class CustomerManagement extends JFrame {
         topPanel.add(backButton, BorderLayout.WEST);
         add(topPanel, BorderLayout.NORTH);
 
-        JButton btnAddCustomer = new JButton("Add Customer");
-        JButton btnViewCustomers = new JButton("View Customers");
+        // Add logout functionality (e.g., close app)
+        System.exit(0); // Exit the application immediately
 
-        add(btnAddCustomer);
-        add(btnViewCustomers);
-
-        setSize(300, 150);
-        setLocationRelativeTo(null); // Center the window
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setSize(200, 100);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
 }
+

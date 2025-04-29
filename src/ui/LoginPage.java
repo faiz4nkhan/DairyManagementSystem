@@ -1,6 +1,9 @@
 package ui;
 
+
+
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
@@ -15,6 +18,21 @@ public class LoginPage extends JFrame {
         setSize(350, 200);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null); // Center screen
+
+        // TOP PANEL with Back Button
+        JPanel topPanel = new JPanel(new BorderLayout());
+        JButton backButton = new JButton("← Back");
+        backButton.setFocusPainted(false);
+        backButton.setBackground(new Color(70, 130, 180)); // Optional color
+        backButton.setForeground(Color.WHITE); // Optional text color
+
+        backButton.addActionListener(e -> {
+            new MainMenu();  // Open MainMenu
+            dispose();       // Close this page
+        });
+
+        topPanel.add(backButton, BorderLayout.WEST);
+        add(topPanel, BorderLayout.NORTH);
 
         JPanel panel = new JPanel(new GridLayout(3, 2, 10, 10));
 
@@ -46,26 +64,34 @@ public class LoginPage extends JFrame {
         String password = String.valueOf(passwordField.getPassword());
 
         try {
+            // Connect to the database
             Connection conn = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/dairy_management", "admin", "1234"
+                "jdbc:mysql://localhost:3306/dairy_management", "admin", "admin123"
             );
-        
-            String query = "INSERT INTO users (username, password) VALUES (?, ?)";
+            
+            // Query to check if the username and password exist
+            String query = "SELECT * FROM users WHERE username = ? AND password = ?";
             PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setString(1, username);  // from your input field
-            stmt.setString(2, password);  // from your input field
-        
-            int rowsInserted = stmt.executeUpdate();
-            if (rowsInserted > 0) {
-                JOptionPane.showMessageDialog(this, "New User Registered Successfully!");
-                dispose(); // Close the login page or open the dashboard
+            stmt.setString(1, username);  // Set the username from the input field
+            stmt.setString(2, password);  // Set the password from the input field
+            
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                // User found, login successful
+                JOptionPane.showMessageDialog(this, "Login Successful!");
+                dispose();  // Close the login page
+                new MainMenu();  // Open the main menu (or whatever your next screen is)
             } else {
-                JOptionPane.showMessageDialog(this, "Failed to Register User.");
+                // No matching user found
+                JOptionPane.showMessageDialog(this, "Invalid username or password.");
             }
             
+            // Close the connection
             conn.close();
-        } catch (Exception ex) {
+        } catch (SQLException ex) {
             ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Database error: " + ex.getMessage());
         }
     }
 
